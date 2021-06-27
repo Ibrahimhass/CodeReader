@@ -69,14 +69,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="258"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="7ao-cf-wTP"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L8-mX-dj9">
-                                <rect key="frame" x="18" y="197" width="444" height="21"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Drop an image to convert its source code to text" id="GS4-kb-w2o">
-                                    <font key="font" textStyle="title2" name=".SFNS-Regular"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <visualEffectView blendingMode="withinWindow" material="ultraDark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-5N-LmN">
+                                <rect key="frame" x="20" y="217" width="440" height="21"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L8-mX-dj9">
+                                        <rect key="frame" x="-2" y="0.0" width="444" height="21"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="center" title="Drop an image to convert its source code to text" id="GS4-kb-w2o">
+                                            <font key="font" textStyle="title2" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="6L8-mX-dj9" firstAttribute="leading" secondItem="cfb-5N-LmN" secondAttribute="leading" id="5ls-KS-JTX"/>
+                                    <constraint firstAttribute="trailing" secondItem="6L8-mX-dj9" secondAttribute="trailing" id="XAx-Hb-jlW"/>
+                                    <constraint firstItem="6L8-mX-dj9" firstAttribute="top" secondItem="cfb-5N-LmN" secondAttribute="top" id="nhj-HT-Maa"/>
+                                    <constraint firstAttribute="bottom" secondItem="6L8-mX-dj9" secondAttribute="bottom" id="t27-b1-YtK"/>
+                                </constraints>
+                            </visualEffectView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="HRA-It-nSf" customClass="ADragDropView" customModule="CodeReader" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="258"/>
                                 <subviews>
@@ -103,18 +114,18 @@ DQ
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="cfb-5N-LmN" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="AW4-CP-wiO"/>
                             <constraint firstItem="DhK-X2-6d8" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="BLm-6E-swd"/>
                             <constraint firstItem="HRA-It-nSf" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="E9i-cW-opH"/>
                             <constraint firstItem="HRA-It-nSf" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="KLT-MA-fYT"/>
                             <constraint firstAttribute="bottom" secondItem="3lC-7B-3TQ" secondAttribute="bottom" constant="8" id="LV3-QH-sIf"/>
+                            <constraint firstItem="cfb-5N-LmN" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="MmH-3w-od1"/>
                             <constraint firstItem="3lC-7B-3TQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="QVK-pd-Qpu"/>
                             <constraint firstItem="HRA-It-nSf" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="RYt-QI-RhX"/>
-                            <constraint firstItem="6L8-mX-dj9" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="TTp-15-f8F"/>
                             <constraint firstAttribute="trailing" secondItem="3lC-7B-3TQ" secondAttribute="trailing" constant="8" id="Wy1-iS-5B6"/>
                             <constraint firstItem="DhK-X2-6d8" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="X4b-gb-ZaQ"/>
-                            <constraint firstItem="6L8-mX-dj9" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="40" id="XxR-47-xG5"/>
                             <constraint firstItem="DhK-X2-6d8" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="c0i-3z-dJx"/>
-                            <constraint firstAttribute="trailing" secondItem="6L8-mX-dj9" secondAttribute="trailing" constant="20" id="t5j-Ez-DWk"/>
+                            <constraint firstAttribute="trailing" secondItem="cfb-5N-LmN" secondAttribute="trailing" constant="20" id="iri-IG-zUH"/>
                             <constraint firstItem="DhK-X2-6d8" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="tlz-LZ-Jdt"/>
                             <constraint firstItem="HRA-It-nSf" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="xpG-B5-UEh"/>
                         </constraints>
