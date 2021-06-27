@@ -18,7 +18,6 @@ open class NSGradientView: NSView {
         super.draw(dirtyRect)
         let bgGradient = NSGradient.init(colorsAndLocations: (startColor, startPosition), (endColor, endPosition))
         let path = NSBezierPath.init(rect: self.frame)
-        print(self.frame.width)
         bgGradient?.draw(in: path, angle: rotation)
     }
 }
