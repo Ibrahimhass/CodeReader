@@ -23,7 +23,7 @@ class ViewController: NSViewController {
     }
     
     private func checkAndActivateConvertButton() {
-        convertButton.isHidden = pickedImagesUrls.isEmpty
+        convertButton.isEnabled = !pickedImagesUrls.isEmpty
     }
     
     override func viewDidLoad() {
@@ -40,17 +40,19 @@ class ViewController: NSViewController {
     }
     
     @IBAction func convertTapped(_ sender: NSButton) {
+        if sender.title == "Ok" {
+            titleLabel.stringValue = "Drop an image to convert its source code to text"
+            pickedImageView.image = nil
+            sender.title = "Convert"
+            checkAndActivateConvertButton()
+        }
         if let imageUrl = pickedImagesUrls.last,
            let image = NSImage.init(contentsOf: imageUrl) {
             titleLabel.stringValue = "Converting"
             ImageAnalyser().analyseImage(image: image, completion: {
                 self.pickedImagesUrls = []
-                self.checkAndActivateConvertButton()
                 self.titleLabel.stringValue = "Converted code has been copied to the clipboard"
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                    self.titleLabel.stringValue = "Drop an image to convert its source code to text"
-                    self.pickedImageView.image = nil
-                })
+                sender.title = "Ok"
             })
         }
     }
@@ -64,11 +66,6 @@ extension ViewController {
         self.preferredContentSize = NSMakeSize(480, 272)
         let button = view.window?.standardWindowButton(NSWindow.ButtonType.zoomButton)
         button?.isEnabled = false
-    }
-    
-    private func customizeButton() {
-        convertButton.wantsLayer = true
-        convertButton.layer?.backgroundColor = NSColor.green.cgColor
     }
 }
 
