@@ -1,6 +1,6 @@
 # CodeReader
 
-A simple macOS app to read code form images, written purely in SWIFT using Vision Framework.
+A simple macOS app to read code from images, written purely in SWIFT using Vision Framework.
 
 # Usage
 1) Drag an image
