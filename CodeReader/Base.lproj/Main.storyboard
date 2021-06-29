@@ -12,17 +12,12 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="CodeReader" id="1Xt-HY-uBw">
+                            <menuItem title="CodeReader" state="on" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="File" id="dMs-cI-mzQ">
+                            <menuItem title="History" id="Kn5-cz-M8n">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Edit" id="5QF-Oa-p0T">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="Help" id="wpr-3q-Mcd">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="History" id="e3v-Q7-W7C"/>
                             </menuItem>
                         </items>
                     </menu>
@@ -30,7 +25,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CodeReader" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CodeReader" customModuleProvider="target">
+                    <connections>
+                        <outlet property="menuHistory" destination="Kn5-cz-M8n" id="S9z-ol-bW0"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -66,7 +65,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DhK-X2-6d8">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="258"/>
+                                <rect key="frame" x="0.0" y="-7" width="480" height="272"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="272" id="8l6-do-0DU"/>
+                                    <constraint firstAttribute="width" constant="480" id="T0B-Il-rER"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="7ao-cf-wTP"/>
                             </imageView>
                             <visualEffectView blendingMode="withinWindow" material="ultraDark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-5N-LmN">
@@ -112,10 +115,13 @@ DQ
                                     <action selector="convertTapped:" target="XfG-lQ-9wD" id="oQL-Sq-j5X"/>
                                 </connections>
                             </button>
+                            <progressIndicator maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="5TB-F5-4cz">
+                                <rect key="frame" x="224" y="113" width="32" height="32"/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="5TB-F5-4cz" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="5v2-bv-4Cn"/>
                             <constraint firstItem="cfb-5N-LmN" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="AW4-CP-wiO"/>
-                            <constraint firstItem="DhK-X2-6d8" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="BLm-6E-swd"/>
                             <constraint firstItem="HRA-It-nSf" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="E9i-cW-opH"/>
                             <constraint firstItem="HRA-It-nSf" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="KLT-MA-fYT"/>
                             <constraint firstAttribute="bottom" secondItem="3lC-7B-3TQ" secondAttribute="bottom" constant="8" id="LV3-QH-sIf"/>
@@ -125,17 +131,19 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="3lC-7B-3TQ" secondAttribute="trailing" constant="8" id="Wy1-iS-5B6"/>
                             <constraint firstItem="DhK-X2-6d8" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="X4b-gb-ZaQ"/>
                             <constraint firstItem="DhK-X2-6d8" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="c0i-3z-dJx"/>
+                            <constraint firstItem="5TB-F5-4cz" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="fza-Z4-hrm"/>
                             <constraint firstAttribute="trailing" secondItem="cfb-5N-LmN" secondAttribute="trailing" constant="20" id="iri-IG-zUH"/>
-                            <constraint firstItem="DhK-X2-6d8" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="tlz-LZ-Jdt"/>
                             <constraint firstItem="HRA-It-nSf" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="xpG-B5-UEh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="5TB-F5-4cz" id="tAF-cl-Ahd"/>
                         <outlet property="convertButton" destination="3lC-7B-3TQ" id="qOs-dc-EEf"/>
                         <outlet property="dragView" destination="HRA-It-nSf" id="bfg-XV-cBV"/>
                         <outlet property="mainView" destination="m2S-Jp-Qdl" id="Ofq-wH-cGT"/>
                         <outlet property="pickedImageView" destination="DhK-X2-6d8" id="RgE-3w-G8J"/>
                         <outlet property="titleLabel" destination="6L8-mX-dj9" id="LS1-zA-BLE"/>
+                        <outlet property="visualEffectView" destination="cfb-5N-LmN" id="M1l-1v-Ovj"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

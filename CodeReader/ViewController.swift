@@ -9,16 +9,22 @@ import Cocoa
 
 class ViewController: NSViewController {
     
+    @IBOutlet weak var visualEffectView: NSVisualEffectView!
     @IBOutlet var mainView: NSGradientView!
     @IBOutlet weak var pickedImageView: NSImageView!
     @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet var dragView: ADragDropView!
     @IBOutlet weak var convertButton: NSButton!
+    @IBOutlet weak var activityIndicator: NSProgressIndicator!
+    
+    private var outputText: String = ""
     
     private var pickedImagesUrls: [URL] = []
     
     override func viewWillAppear() {
         super.viewWillAppear()
+        activityIndicator.isHidden = true
+        activityIndicator.controlTint = .graphiteControlTint
         checkAndActivateConvertButton()
     }
     
@@ -40,21 +46,54 @@ class ViewController: NSViewController {
     }
     
     @IBAction func convertTapped(_ sender: NSButton) {
-        if sender.title == "Ok" {
-            titleLabel.stringValue = "Drop an image to convert its source code to text"
-            pickedImageView.image = nil
-            sender.title = "Convert"
-            checkAndActivateConvertButton()
-        }
         if let imageUrl = pickedImagesUrls.last,
            let image = NSImage.init(contentsOf: imageUrl) {
-            titleLabel.stringValue = "Converting"
-            ImageAnalyser().analyseImage(image: image, completion: {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimation(nil)
+            ImageAnalyser().analyseImage(image: image, completion: { text in
                 self.pickedImagesUrls = []
-                self.titleLabel.stringValue = "Converted code has been copied to the clipboard"
-                sender.title = "Ok"
+                self.activityIndicator.isHidden = true
+                self.outputText = text
+                self.showDailog()
             })
         }
+    }
+    
+    func showDailog() {
+        let copyAlert: NSAlert = NSAlert()
+        copyAlert.messageText = "Code has been Converted"
+        copyAlert.informativeText = "The image code has been converted"
+        copyAlert.addButton(withTitle: "Copy")
+        copyAlert.alertStyle = NSAlert.Style.informational
+
+        if let window = self.view.window {
+            copyAlert.beginSheetModal(for: window, completionHandler: { (modalResponse: NSApplication.ModalResponse) -> Void in
+                if(modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn){
+                    self.copyTappedAndSave()
+                }
+            })
+        }
+    }
+    
+    private func copyTappedAndSave() {
+        ClipBoardManager().copy(text: self.outputText)
+        Persistance().save(self.outputText)
+        refreshMenuBar()
+        prepareForNextConversion()
+    }
+    
+    private func refreshMenuBar() {
+        if let appDelegate = NSApplication.shared.delegate as? AppDelegate {
+            appDelegate.refreshMenuBar()
+        }
+    }
+    
+    private func prepareForNextConversion() {
+        visualEffectView.isHidden = false
+        titleLabel.stringValue = "Drop an image to convert its source code to text"
+        pickedImageView.image = nil
+        convertButton.title = "Convert"
+        checkAndActivateConvertButton()
     }
 }
 
@@ -74,8 +113,8 @@ extension ViewController: ADragDropViewDelegate {
     func dragDropView(_ dragDropView: ADragDropView, droppedFileWithURL URL: URL) {
         pickedImagesUrls.append(URL)
         pickedImageView.image = NSImage(contentsOf: URL)
-        pickedImageView.imageScaling = .scaleProportionallyUpOrDown
-        titleLabel.stringValue = "Click the convert button to convert this image to code. To try another image drag another image."
+        pickedImageView.imageScaling = .scaleProportionallyDown
+        visualEffectView.isHidden = true
         checkAndActivateConvertButton()
     }
     

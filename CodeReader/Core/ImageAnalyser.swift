@@ -11,7 +11,7 @@ import CoreGraphics
 
 class ImageAnalyser {
     
-    func analyseImage(image: NSImage, completion: @escaping () -> Void) {
+    func analyseImage(image: NSImage, completion: @escaping (_ text: String) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             // Get the CGImage on which to perform requests.
             guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return }
@@ -35,12 +35,8 @@ class ImageAnalyser {
                     return observation.topCandidates(1).first?.string
                 }
                 
-                let pasteboard = NSPasteboard.general
-                pasteboard.clearContents()
-                pasteboard.setString(recognizedStrings.joined(separator: "\n"), forType: .string)
-
                 DispatchQueue.main.async {
-                    completion()
+                    completion(recognizedStrings.joined(separator: "\n"))
                 }
                 // Process the recognized strings.
             }
