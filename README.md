@@ -4,11 +4,12 @@ A simple macOs app to read code form images, written purely in SWIFT using Visio
 
 # Usage
 1) Drag an image
-![Drag an image](https://imgur.com/m3IOAdU.png)
+![Drag an image](https://i.imgur.com/rYFsVCp.jpg)
 2) Click the convert button
 ![Click Convert](https://i.imgur.com/QLAW0UE.png)
 
 # Result
+```
 extension SwitchBuilder {
 private func introspectablePropertiesDict() -> [String: String] {
 let uiKitExclusiveProperties = [
@@ -26,6 +27,7 @@ return uiKitExclusiveProperties. merge (dict: optionalProperties)
 } else {
 return uiKitExclusiveProperties
 }
+```
 
 # Build Requirements
 
