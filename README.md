@@ -1,4 +1,4 @@
-[![Swift 5.4](https://img.shields.io/badge/swift-5.1-ED523F.svg?style=flat)](https://swift.org/download/)
+[![Swift 5.4](https://img.shields.io/badge/swift-5.4-ED523F.svg?style=flat)](https://swift.org/download/)
 
 # CodeReader
 
