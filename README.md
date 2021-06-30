@@ -1,6 +1,8 @@
+[![Swift 5.4](https://img.shields.io/badge/swift-5.4-ED523F.svg?style=flat)](https://swift.org/download/)
+
 # CodeReader
 
-A simple macOs app to read code form images, written purely in SWIFT using Vision Framework.
+A simple macOS app to read code from images, written purely in Swift using Vision Framework.
 
 # Usage
 1) Drag an image
@@ -9,7 +11,7 @@ A simple macOs app to read code form images, written purely in SWIFT using Visio
 ![Click Convert](https://i.imgur.com/cFuZG5g.png)
 
 # Result
-```
+``` swift
 Converted by Storyboard to Swift Converter - https://swiftify.com/converter/storyboard2swiftui
 import Swiftul
 import Introspect
