@@ -111,6 +111,10 @@ a. bounds. height
 ## macOS
 macOS Catalina
 
+Download the App directly.
+https://github.com/Ibrahimhass/CodeReader/releases/download/1.0.2/CodeReader.zip
+
+
 ## Author
 
 Md Ibrahim Hassan, mdibrahimhassan@gmail.com
